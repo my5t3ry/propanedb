@@ -1,0 +1,10 @@
+[Unit]
+Description=propane-service
+After=network.target
+
+[Service]
+ExecStart=/app/server
+RestartSec=50s
+
+[Install]
+WantedBy=multi-user.target
