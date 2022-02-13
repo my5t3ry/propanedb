@@ -2,3 +2,5 @@ build
 dependencies/*
 deploy/*
 boost
+.idea
+*.iml
