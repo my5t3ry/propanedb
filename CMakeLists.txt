@@ -113,7 +113,7 @@ target_link_libraries(propane_lib
         )
 
 
-add_executable(server src/Server.cpp)
+add_executable(server src/Server.cpp src/SimpleAuth0MetadataAuthProcessor.cpp src/SimpleAuth0MetadataAuthProcessor.hpp src/TestInterceptor.cpp src/TestInterceptor.hpp src/Globalnterceptor.cpp src/Globalnterceptor.hpp)
 add_dependencies(server propane_lib)
 target_link_libraries(server
         propane_lib

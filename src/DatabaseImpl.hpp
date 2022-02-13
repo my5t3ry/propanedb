@@ -31,6 +31,7 @@ using namespace std;
 
 struct Metadata {
   string databaseName;
+  string authToken;
 };
 
 class DatabaseImpl {

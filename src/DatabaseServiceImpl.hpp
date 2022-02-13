@@ -19,6 +19,7 @@
 
 #include "DatabaseImpl.hpp"
 #include "QueryParser.hpp"
+#include "SimpleAuth0MetadataAuthProcessor.hpp"
 
 using google::protobuf::Any;
 using grpc::Server;
@@ -40,7 +41,7 @@ class DatabaseServiceImpl final : public Database::Service {
 
  public:
   DatabaseServiceImpl(const string &databasePath, const string &backupPath,
-                      bool debug);
+                      bool debug, SimpleAuth0MetadataAuthProcessor *auth);
   ~DatabaseServiceImpl();
   grpc::Status Put(ServerContext *context, const propane::PropanePut *request,
                    propane::PropaneId *reply) override;
@@ -67,4 +68,5 @@ class DatabaseServiceImpl final : public Database::Service {
       ServerContext *context,
       ::grpc::ServerReader<::propane::PropaneRestoreRequest> *reader,
       ::propane::PropaneRestoreReply *response);
+  SimpleAuth0MetadataAuthProcessor *auth;
 };

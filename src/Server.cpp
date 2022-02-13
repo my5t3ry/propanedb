@@ -11,6 +11,8 @@
 #include <grpcpp/health_check_service_interface.h>
 #include <google/protobuf/dynamic_message.h>
 #include "DatabaseServiceImpl.hpp"
+#include "TestInterceptor.hpp"
+#include "Globalnterceptor.hpp"
 
 using google::protobuf::Any;
 using grpc::Server;
@@ -25,10 +27,12 @@ bool debug = false;
 
 void RunServer() {
   std::string server_address("0.0.0.0:50051");
-  DatabaseServiceImpl service(databasePath, backupPath, debug);
+  DatabaseServiceImpl service(databasePath, backupPath, debug,
+                              new SimpleAuth0MetadataAuthProcessor());
   grpc::EnableDefaultHealthCheckService(true);
   grpc::reflection::InitProtoReflectionServerBuilderPlugin();
   ServerBuilder builder;
+
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
   builder.RegisterService(&service);
   std::unique_ptr<Server> server(builder.BuildAndStart());
