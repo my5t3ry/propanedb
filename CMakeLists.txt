@@ -113,7 +113,7 @@ target_link_libraries(propane_lib
         )
 
 
-add_executable(server src/Server.cpp src/SimpleAuth0MetadataAuthProcessor.cpp src/SimpleAuth0MetadataAuthProcessor.hpp src/TestInterceptor.cpp src/TestInterceptor.hpp src/Globalnterceptor.cpp src/Globalnterceptor.hpp)
+add_executable(server src/Server.cpp src/SimpleAuth0MetadataAuthProcessor.cpp src/SimpleAuth0MetadataAuthProcessor.hpp)
 add_dependencies(server propane_lib)
 target_link_libraries(server
         propane_lib
@@ -124,10 +124,6 @@ target_link_libraries(server
 option(USE_GCOV "Use GCOV" OFF) #OFF by default
 
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
-    #set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=clang-diagnostic-*,clang-analyzer-*")
-    #set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=*,,readability-*")
-
-
     if (USE_GCOV)
         message("GCOV enabled")
         include(CodeCoverage)
